@@ -136,6 +136,7 @@ public class Points {
 
         if (!alreadyExist) {
           String name = new String();
+          Globals.trolleys.add(trolleyCount, new Pose2d(new Translation2d(x, y), Globals.curPose.getRotation()));
           name = "T" + trolleyCount++;
           pointMap.put(name, new Pose2d(new Translation2d(x, y), Globals.curPose.getRotation()));
           obstacleMap.put(name, new Pose2d(new Translation2d(x, y), Globals.curPose.getRotation()));
@@ -199,12 +200,10 @@ public class Points {
             + camOffset.getTranslation().getX();
       }
 
-      // double upperbound = distanceFromOrigin + tolerance;
-      // double lowerbound = distanceFromOrigin - tolerance;
       upperbound = new Pose2d(new Translation2d(x + tolerance, y + tolerance), new Rotation2d());
       lowerbound = new Pose2d(new Translation2d(x - tolerance, y - tolerance), new Rotation2d());
 
-      // Some values given by python script is lesser than startpos, why? idk
+
 
       for (Pose2d location : pointMap.values()) {
         if ((location.getTranslation().getX() >= lowerbound.getTranslation().getX()
@@ -218,6 +217,15 @@ public class Points {
 
       if (!alreadyExist) {
         pointMap.put(targetName, new Pose2d(new Translation2d(x, y), Globals.curPose.getRotation()));
+        if(targetName == "RedTarget"){
+          Globals.targetAreas.add(0, new Pose2d(new Translation2d(x, y), Globals.curPose.getRotation()));
+        }
+        else if(targetName == "GreenTarget"){
+          Globals.targetAreas.add(1, new Pose2d(new Translation2d(x, y), Globals.curPose.getRotation()));
+        }
+        else if(targetName == "BlueTarget"){
+          Globals.targetAreas.add(2, new Pose2d(new Translation2d(x, y), Globals.curPose.getRotation()));
+        }
       }
     }
 

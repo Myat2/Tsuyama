@@ -100,9 +100,9 @@ public class SortItems extends SequentialCommandGroup {
                 new MoveCamera(286),
                 new SelectCommand(
                         Map.ofEntries(
-                                Map.entry(CommandSelector.ONE, new SequentialCommandGroup(new MovetoB(()->RobotContainer.m_Grid.findGotoPos(RobotContainer.m_points.getPoint("T1").getTranslation(), 0.6)), new MoveRobot(1, 0.05, 0, 0, 0.4))),
-                                Map.entry(CommandSelector.TWO, new SequentialCommandGroup(new MovetoB(()->RobotContainer.m_Grid.findGotoPos(RobotContainer.m_points.getPoint("T2").getTranslation(), 0.6)), new MoveRobot(1, 0.05, 0, 0, 0.4))),
-                                Map.entry(CommandSelector.THREE, new SequentialCommandGroup(new MovetoB(()->RobotContainer.m_Grid.findGotoPos(RobotContainer.m_points.getPoint("T3").getTranslation(), 0.6)), new MoveRobot(1, 0.05, 0, 0, 0.4)))),
+                                Map.entry(CommandSelector.ONE, new SequentialCommandGroup(new MovetoB(()->RobotContainer.m_Grid.findGotoPos(Globals.pairedTrolleyTarget.get(0)[1].getPoint().getTranslation(), 0.6)), new MoveRobot(1, 0.05, 0, 0, 0.4))), // Red 
+                                Map.entry(CommandSelector.TWO, new SequentialCommandGroup(new MovetoB(()->RobotContainer.m_Grid.findGotoPos(Globals.pairedTrolleyTarget.get(1)[1].getPoint().getTranslation(), 0.6)), new MoveRobot(1, 0.05, 0, 0, 0.4))), // Green
+                                Map.entry(CommandSelector.THREE, new SequentialCommandGroup(new MovetoB(()->RobotContainer.m_Grid.findGotoPos(Globals.pairedTrolleyTarget.get(2)[1].getPoint().getTranslation(), 0.6)), new MoveRobot(1, 0.05, 0, 0, 0.4)))), // Blue
                         SortItems::selectTarget),
                 // Lifts arm
                 new DetectionPosition(),
@@ -126,19 +126,12 @@ public class SortItems extends SequentialCommandGroup {
                                 Map.entry(CommandSelector.TWO, new InstantCommand()) // blank
                                 ),
                         SortItems::calibration),
-                // new MoveRobot(1, -0.05, 0, 0, 0.1),
                 new SelectCommand(
                         Map.ofEntries(
                                 Map.entry(CommandSelector.ONE, new MovetoB(Layout.PickUpBinPos)),
                                 Map.entry(CommandSelector.TWO, new MovetoPoint("Bin2", 0.75))),
                         SortItems::selectBin),
-                // new SelectCommand(
-                //         Map.ofEntries(
-                //                 Map.entry(CommandSelector.ONE,
-                //                         new Rotate2Orientation(Layout.PickUpBinPos.getRotation().getDegrees())),
-                //                 Map.entry(CommandSelector.TWO,
-                //                         new SequentialCommandGroup())),
-                //         SortItems::selectRotation),
+
 
                 new Align2Line(),
                 new ViewItem()

@@ -120,41 +120,41 @@ public class SortTrolleys extends SequentialCommandGroup {
         super(
             
 
-                new MovetoB(()->RobotContainer.m_Grid.findGotoPos(RobotContainer.m_points.getPoint("T1").getTranslation(), 0.55)),
+                new MovetoB(()->RobotContainer.m_Grid.findGotoPos(Globals.pairedTrolleyTarget.get(0)[1].getPoint().getTranslation(), 0.55)),
                 new Align2Trolley(),
                 new TrolleyHolder(1),
-                new InstantCommand(() -> RobotContainer.m_points.removeObs("T1")),
+                new InstantCommand(() -> RobotContainer.m_points.removeObs(Globals.pairedTrolleyTarget.get(0)[1].getName())),
 
                 new InstantCommand(() -> RobotContainer.m_vision.setColor("Red")),
                 new GotoColor("RedTarget"),
                 new TrolleyHolder(0),
                 new MoveRobot(1, -0.05, 0, 0, 0.1),
-                new InstantCommand(() -> RobotContainer.m_points.addObsPoint("RedTarget", pointMap.get("RedTarget"))),
+                new InstantCommand(() -> RobotContainer.m_points.addObsPoint("RedTarget", Globals.pairedTrolleyTarget.get(0)[0].getPoint())),
                 new InstantCommand(() -> RobotContainer.m_points.AddObsGrid()),
 
-                new MovetoB(()->RobotContainer.m_Grid.findGotoPos(RobotContainer.m_points.getPoint("T2").getTranslation(), 0.55)),
+                new MovetoB(()->RobotContainer.m_Grid.findGotoPos(Globals.pairedTrolleyTarget.get(1)[1].getPoint().getTranslation(), 0.55)),
                 new Align2Trolley(),
                 new TrolleyHolder(1),
-                new InstantCommand(() -> RobotContainer.m_points.removeObs("T2")),
+                new InstantCommand(() -> RobotContainer.m_points.removeObs(Globals.pairedTrolleyTarget.get(0)[1].getName())),
 
                 new InstantCommand(() -> RobotContainer.m_vision.setColor("Green")),
                 new GotoColor("GreenTarget"),
                 new TrolleyHolder(0),
                 new MoveRobot(1, -0.05, 0, 0, 0.1),
                 new InstantCommand(
-                        () -> RobotContainer.m_points.addObsPoint("GreenTarget", pointMap.get("GreenTarget"))),
+                        () -> RobotContainer.m_points.addObsPoint(Globals.pairedTrolleyTarget.get(1)[0].getName(), Globals.pairedTrolleyTarget.get(1)[0].getPoint())),
                 new InstantCommand(() -> RobotContainer.m_points.AddObsGrid()),
 
-                new MovetoB(()->RobotContainer.m_Grid.findGotoPos(RobotContainer.m_points.getPoint("T3").getTranslation(), 0.55)),
+                new MovetoB(()->RobotContainer.m_Grid.findGotoPos(Globals.pairedTrolleyTarget.get(0)[1].getPoint().getTranslation(), 0.55)),
                 new Align2Trolley(),
                 new TrolleyHolder(1),
-                new InstantCommand(() -> RobotContainer.m_points.removeObs("T3")),
+                new InstantCommand(() -> RobotContainer.m_points.removeObs(Globals.pairedTrolleyTarget.get(0)[1].getName())),
 
                 new InstantCommand(() -> RobotContainer.m_vision.setColor("Blue")),
                 new GotoColor("BlueTarget"),
                 new TrolleyHolder(0),
                 new MoveRobot(1, -0.05, 0, 0, 0.1),
-                new InstantCommand(() -> RobotContainer.m_points.addObsPoint("BlueTarget", pointMap.get("BlueTarget"))),
+                new InstantCommand(() -> RobotContainer.m_points.addObsPoint(Globals.pairedTrolleyTarget.get(2)[0].getName(), Globals.pairedTrolleyTarget.get(2)[0].getPoint())),
                 new InstantCommand(() -> RobotContainer.m_points.AddObsGrid()));
     }
 

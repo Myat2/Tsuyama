@@ -251,6 +251,11 @@ public class Globals {
     trolleys.add(2, Layout.T3Pos);
   }
 
+  /*
+   * Point[0] -> Target Area
+   * Point[1] -> Trolley
+   * Array list goes from Red, Green, Blue
+   */
   public static ArrayList<Point[]> pairedTrolleyTarget = new ArrayList<Point[]>();
   public static ArrayList<Pose2d> targetAreas = new ArrayList<Pose2d>(); // Add when putting a point
   public static ArrayList<Pose2d> trolleys = new ArrayList<Pose2d>();
