@@ -83,6 +83,7 @@ public class Points {
       return Globals.curPose;
 
   }
+  
 
   public double[] getDistanceTarget(String targetName) {
     double[] distance = (pointsTable.getEntry(targetName).getDoubleArray(defaultValue));
