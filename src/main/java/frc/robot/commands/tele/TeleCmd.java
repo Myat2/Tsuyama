@@ -20,6 +20,14 @@ public class TeleCmd extends CommandBase
     private final OI m_oi;
     private final int[] cvModes = {-2,-1,0,1,2,3,4,5};
     private int cvSelector = 0;
+
+
+    private double permX = 0.3;
+    private double permY = 0.3; 
+    private double prevX;
+    private double prevY;
+    Translation2d pos;
+    Translation2d prevpos;
     /**
      * Constructor
      */
@@ -39,6 +47,8 @@ public class TeleCmd extends CommandBase
     @Override
     public void initialize()
     {
+        prevX = m_arm.getSliderX();
+        prevY = m_arm.getSliderY();
         cvSelector = 0;
     }
 
@@ -55,42 +65,46 @@ public class TeleCmd extends CommandBase
         //Left stick for W (rotational) control
         double x = m_oi.getRightDriveX();
         double y = -m_oi.getRightDriveY();//Down is positive. Need to negate
+
         double w = -m_oi.getLeftDriveX(); //X-positive is CW. Need to negate
+
         boolean open = m_oi.getDriveAButton();
         boolean cvModeSW = m_oi.getDriveBButton();
         boolean lower = m_oi.getDriveRightBumper();
-        if(cvModeSW){
-            cvSelector++;
-        }
-        if (lower){
-            m_arm.setArmPos(new Translation2d(0.33,-0.07));
-        }
-        else{
-            m_arm.setArmPos(new Translation2d(0.33,0.24));
-        }
-        Globals.cvMode = cvModes[cvSelector%8];
+       
         
-        if(open){
-            m_arm.setGripper(300);
-        }
-        else{
-            m_arm.setGripper(0);
-        }
-        m_arm.setGripper(0);
-        // m_arm.setCameraAngle(90);
         //Get other buttons?
+        // m_omnidrive.setRobotSpeedXYW(x*0.4, y*0.4, w*Math.PI/2);
 
-        //Add code here to control servo motor etc.
 
-        //m_omnidrive.setMotorOut012(s0,s1,s2);
-        // m_arm.setShoulderAngle( (w*150) + 150);
-        // m_arm.setElbowAngle( (w*150) + 150);
-        m_omnidrive.setRobotSpeedXYW(x*0.4, y*0.4, w*Math.PI/2);
-        Translation2d pos = new Translation2d(m_arm.getSliderX(), m_arm.getSliderY());
+        // permX = permX + x*0.1;
+        // permY = permY + y*0.1;
+
+        // if controller change then arm move, else check if slider change then if nothing change maintain position.
+        if (x != 0 || y != 0)
+        {
+            pos = new Translation2d(m_arm.getSliderX() + m_oi.getRightDriveX() , m_arm.getSliderY() -m_oi.getRightDriveY() );
+        }
+        else if (prevX != m_arm.getSliderX() || prevY != m_arm.getSliderY() )
+        {
+            pos = new Translation2d(m_arm.getSliderX(), m_arm.getSliderY());
+        }
+        else
+        {
+            pos = prevpos;
+        }
+
+        pos = new Translation2d(m_arm.getSliderX(), m_arm.getSliderY());
         m_arm.setArmPos(pos);
+
+
+    
+
         m_arm.setCameraAngle(m_arm.getSliderCamera());
         m_arm.setGripper(m_arm.getSliderGripper());
-
+        prevpos = pos;
+        prevX = m_arm.getSliderX();
+        prevY = m_arm.getSliderY();
     }
 
     /**

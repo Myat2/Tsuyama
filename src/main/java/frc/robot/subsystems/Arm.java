@@ -18,14 +18,14 @@ public class Arm extends SubsystemBase {
     private final Servo shoulderServo, elbowServo, gripperServo, cameraServo, trolleyServo;
 
     private Translation2d m_pos; // current arm tip position
-    private final double a1 = 0.24;
-    private final double a2 = 0.335;
+    private final double a1 = 0.30;  //lower arm
+    private final double a2 = 0.30;  //upper arm
 
     private double offset0 = 0; // For making software adjustment to servo
     private double offset1 = 0;
 
 
-    private double shoulderRatio = 4.0;
+    private double shoulderRatio = 2.0;
     private double elbowRatio = 2.0;
 
     
@@ -66,12 +66,12 @@ public class Arm extends SubsystemBase {
         gripperServo = new Servo(2); // gripper 
         cameraServo = new Servo(3); // camera
         trolleyServo = new Servo(4); // trolley holder
-        m_pos = new Translation2d(0.335,0.34);
+        m_pos = new Translation2d(0.3,0.3);
         
     }
 
     public void initialize() {
-        m_pos = new Translation2d(0.335,0.34);
+        m_pos = new Translation2d(0.3,0.3);
         setGripper(150);
         setCameraAngle(300);
         setTrolleyAngle(0);
@@ -145,7 +145,7 @@ public class Arm extends SubsystemBase {
      * @return return slider value
      */
     public double getSliderX() {
-        return D_sliderX.getDouble(0.24);
+        return D_sliderX.getDouble(0.3);
     }
 
     /*
@@ -155,7 +155,7 @@ public class Arm extends SubsystemBase {
      * @return return slider value
      */
     public double getSliderY() {
-        return D_sliderY.getDouble(0.335);
+        return D_sliderY.getDouble(0.3);
     }
     /*
      * Get slider-Gripper value
@@ -242,7 +242,7 @@ public class Arm extends SubsystemBase {
         B = Math.toDegrees(B) * elbowRatio;
 
         // Uncomment if servo direction needs to be flip.
-        // A = 300 - A;
+        A = 300 - A;
 
         shoulderServo.setAngle(A + offset0); // shoulderServo is -15 * shoulderRatio
         elbowServo.setAngle(B + offset1); // elbowServo is -15 degrees * elbowARatio
@@ -250,6 +250,13 @@ public class Arm extends SubsystemBase {
         D_debug1.setDouble(A);
         D_debug2.setDouble(B);
     }
+
+    public void setArmPosInc(double dx, double dy ) {
+        double m_x = dx;
+        double m_y = dy;
+        setArmPos(new Translation2d(m_x, m_y));
+    }
+
     
     public Translation2d getArmPos(){
         return m_pos;

@@ -5,6 +5,8 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ProxyScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.OmniDrive;
@@ -29,10 +31,13 @@ public class AutoMainCmd extends SequentialCommandGroup
         
         super
         (
-            // new Task_A_pick1st()
-            // new Task_A_trolley1st()
-            // new InstantCommand(()->RobotContainer.m_points.test())
-            new Task_B()    
+            new MoveArm(new Translation2d(0.3,0.3), 0.1),
+            new WaitCommand(2),
+            new MoveArm(new Translation2d(0.3,0.4), 0.1),
+            new WaitCommand(2),
+            new MoveArm(new Translation2d(0.3,0.2), 0.1),
+            new WaitCommand(2),
+            new MoveArm(new Translation2d(0.3,0.3), 0.1)
         );
             
     }

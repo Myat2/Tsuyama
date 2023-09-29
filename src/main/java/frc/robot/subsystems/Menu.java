@@ -70,6 +70,9 @@ public class Menu extends SubsystemBase {
         tab.add("CloseGripper", new Gripper(0,80));
         tab.add("OpenGripper", new Gripper(1,80));
         tab.add("Align2Line", new Align2Line());
+        tab.add("FirstStep", new Step1());
+        tab.add("SecondStep", new Step2());
+        tab.add("ThirdStep", new Step3());
         // tab.add("CP6", new CP6());
 
         // A-up button, Y-down button
