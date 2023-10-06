@@ -78,9 +78,9 @@ public class OI
         /**
          * @return a true or false depending on the input
          */
-        public boolean getDriveRightTrigger()
+        public double getDriveRightTrigger()
         {
-            return drivePad.getRawButton(GamepadConstants.RIGHT_TRIGGER);
+            return drivePad.getRawAxis(GamepadConstants.RIGHT_TRIGGER);
         }
 
         /**
@@ -94,9 +94,9 @@ public class OI
         /**
          * @return a true or false depending on the input
          */
-        public boolean getDriveLeftTrigger()
+        public double getDriveLeftTrigger()
         {
-            return drivePad.getRawButton(GamepadConstants.LEFT_TRIGGER);
+            return drivePad.getRawAxis(GamepadConstants.LEFT_TRIGGER);
         }
 
         /**

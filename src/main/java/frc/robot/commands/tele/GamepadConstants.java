@@ -13,8 +13,10 @@ public class GamepadConstants
     public static final int Y_BUTTON            = 4;
     public static final int LEFT_BUMPER         = 5;
     public static final int RIGHT_BUMPER        = 6;
-    public static final int LEFT_TRIGGER        = 0;
-    public static final int RIGHT_TRIGGER       = 0;
+
+    public static final int LEFT_TRIGGER        = 2;
+    public static final int RIGHT_TRIGGER       = 5;
+    
     public static final int BACK_BUTTON         = 7;
     public static final int START_BUTTON        = 8;
     public static final int LEFT_ANALOG_BUTTON  = 9;
