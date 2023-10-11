@@ -110,22 +110,6 @@ public class OI
         /**
          * @return a true or false depending on the input
          */
-        public boolean getDriveDPadX()
-        {
-            return drivePad.getRawButton(GamepadConstants.DPAD_X);
-        }
-
-        /**
-         * @return a true or false depending on the input
-         */
-        public boolean getDriveDPadY()
-        {
-            return drivePad.getRawButton(GamepadConstants.DPAD_Y);
-        }
-
-        /**
-         * @return a true or false depending on the input
-         */
         public boolean getDriveXButton()
         {
             return drivePad.getRawButton(GamepadConstants.X_BUTTON);
@@ -186,6 +170,15 @@ public class OI
         {
             return drivePad.getRawButton(GamepadConstants.LEFT_ANALOG_BUTTON);
         }
+
+        /**
+         * @return a true or false depending on the input
+         */
+        public double getDpad()
+        {
+            return drivePad.getPOV();
+        }
+
         /**
          * 
          * Cycle through all buttons to check if any is pressed

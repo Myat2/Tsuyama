@@ -62,8 +62,11 @@ public class TeleCmd extends CommandBase
         double w = -m_oi.getLeftDriveX(); // X-positive is CW. Need to negate
 
         //arm up and down (y axis)
-        double up = m_oi.getDriveRightTrigger();
-        double down = m_oi.getDriveLeftTrigger();
+        double RightTrig = m_oi.getDriveRightTrigger();
+        double LeftTrig = m_oi.getDriveLeftTrigger();
+
+        //Dpad angle
+        double Dpad  = m_oi.getDpad();
 
         //arm preset positions
         boolean btnY = m_oi.getDriveYButton();
@@ -88,16 +91,17 @@ public class TeleCmd extends CommandBase
             joyXpos = 0.30;
             joyYpos = 0.30;
         }
-        else if (up > 0.1){
-            joyYpos = joyYpos - 0.005;
-        }
-        else if (down > 0.1){
+        else if (RightTrig > 0.1){
             joyYpos = joyYpos + 0.005;
         }
-       else {
-            // Joystick control for arm position
-            joyXpos = joyXpos + (x * 0.004);
-            // joyYpos = joyYpos + (y * 0.004);
+        else if (LeftTrig > 0.1){
+            joyYpos = joyYpos - 0.005;
+        }
+        else if (Dpad == 0) {
+            joyXpos = joyXpos + 0.005;
+        }
+        else if (Dpad == 180) {
+            joyXpos = joyXpos - 0.005;
         }
 
         pos = new Translation2d(joyXpos, joyYpos);
